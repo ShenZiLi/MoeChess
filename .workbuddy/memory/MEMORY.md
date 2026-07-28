@@ -12,7 +12,7 @@
 
 1. **设计阶段不写代码，进入实现前必须向立立确认**
 2. 严格遵循 AGENTS.md 的 11 步开发流程
-3. 验收标准（`docs/development/acceptance-standard.md`）是外部合格线，AI 不得自行新增/改写/降低
+3. 验收标准（`docs/development/acceptance-standard.md`）已于 2026-07-28 经立立确认冻结为外部合格线，AI 不得自行新增/改写/降低
 4. 子 Agent 分工：builder（实现）/ test-author（测试）/ acceptance-checker（核对覆盖）/ visual-reviewer（视觉复核）/ reviewer（综合复核）
 5. 写实现的 Agent 不能担任 visual-reviewer 或 reviewer
 6. `docs/index.md` 新增文档必须同步更新
@@ -43,7 +43,7 @@
 
 - 设计文档：`docs/plans/2026-07-28-moechess-design.md`
 - 产品规格：`spec/v1.0-spec.md`
-- 验收标准：`docs/development/acceptance-standard.md`（草案，待立立确认冻结）
+- 验收标准：`docs/development/acceptance-standard.md`（已确认冻结为外部合格线，2026-07-28 立立确认）
 - 资源说明：`assets/README.md`
 - 文档索引：`docs/index.md`
 

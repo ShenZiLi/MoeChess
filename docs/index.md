@@ -16,9 +16,9 @@
 
 | 文档 | 说明 | 状态 |
 |------|------|------|
-| [docs/development/acceptance-standard.md](development/acceptance-standard.md) | v1.0 验收标准（草案，待确认后冻结为外部合格线） | 草案 |
-| [docs/subagent-guide.md](subagent-guide.md) | 子 Agent 协作规则 | 待建 |
-| [docs/builder-reviewer-separation.md](builder-reviewer-separation.md) | 写代码 AI 与挑毛病 AI 分离规则 | 待建 |
+| [docs/development/acceptance-standard.md](development/acceptance-standard.md) | v1.0 验收标准（已确认冻结为外部合格线） | 已确认 |
+| [docs/subagent-guide.md](subagent-guide.md) | 子 Agent 协作规则 | 已建 |
+| [docs/builder-reviewer-separation.md](builder-reviewer-separation.md) | 写代码 AI 与挑毛病 AI 分离规则 | 已建 |
 
 ## 资源
 
