@@ -9,8 +9,8 @@
 ## - 浏览器 visibilitychange（标签隐藏）暂停轮询，可见后恢复：用 JavaScriptBridge 监听；
 ##   并以 MainLoop.NOTIFICATION_APPLICATION_PAUSED/RESUMED 作兜底（Godot Web 平台会把 visibilitychange 翻译为该通知）。
 ##
-## PlatformConfig 契约（autoload，由 input 层并行实现）：is_web() / should_use_threads()。
-## 本类通过 /root/PlatformConfig 动态调用，未集成时回退 OS.has_feature，仅用于解耦集成顺序，不散落平台分支。
+## PlatformConfig 契约（RefCounted，由 input 层实现）：is_web() / should_use_threads()。
+## 本类通过 PlatformConfig.new() 实例化调用，未集成时回退 OS.has_feature，仅用于解耦集成顺序，不散落平台分支。
 class_name WebLoader
 extends Node
 
@@ -218,7 +218,8 @@ func _should_use_threads() -> bool:
 	return not OS.has_feature("web")
 
 func _platform_config() -> Object:
-	return get_node_or_null("/root/PlatformConfig")
+	# PlatformConfig 是 RefCounted（非 autoload），通过 new() 实例化
+	return PlatformConfig.new()
 
 ## 总体加载进度 0.0~1.0（关键 + 后台）
 func get_progress() -> float:

@@ -110,9 +110,13 @@ func _on_state_changed(_old: String, new_state: String) -> void:
 		"Playing":
 			_playing_state = GameStateMachine.get_playing_state()
 			_connect_playing_state_signals()
-			_input_provider.set_board_state(GameStateMachine.get_board_state())
+			var state: BoardState = GameStateMachine.get_board_state()
+			# 初始化棋盘视觉（必须，否则棋盘上不显示棋子）
+			if _board_view.has_method("setup"):
+				_board_view.setup(state)
+			_input_provider.set_board_state(state)
 			_input_provider.set_enabled(true)
-			_hud.set_turn(GameStateMachine.get_board_state().side_to_move)
+			_hud.set_turn(state.side_to_move)
 		"Paused":
 			_input_provider.set_enabled(false)
 		"Gameover":
@@ -155,11 +159,6 @@ func _connect_playing_state_signals() -> void:
 		_playing_state.ai_thinking_started.connect(_on_ai_thinking_started)
 	if _playing_state.has_signal("ai_thinking_finished"):
 		_playing_state.ai_thinking_finished.connect(_on_ai_thinking_finished)
-	# 订阅 BoardView 点击信号
-	if not _board_view.piece_clicked.is_connected(_on_board_piece_clicked):
-		_board_view.piece_clicked.connect(_on_board_piece_clicked)
-	if not _board_view.cell_clicked.is_connected(_on_board_cell_clicked):
-		_board_view.cell_clicked.connect(_on_board_cell_clicked)
 	# 订阅 BoardView 翻转完成
 	if _board_view.has_signal("flip_finished") and not _board_view.flip_finished.is_connected(_on_flip_done):
 		_board_view.flip_finished.connect(_on_flip_done)
@@ -176,8 +175,10 @@ func _disconnect_playing_state_signals() -> void:
 
 # -------------------- 信号处理 --------------------
 
-func _on_piece_clicked(piece: Piece) -> void:
+func _on_piece_clicked(pos: Vector2i) -> void:
 	if _playing_state != null:
+		var state: BoardState = GameStateMachine.get_board_state()
+		var piece: Piece = state.get_piece_at(pos) if state != null else null
 		_playing_state.on_piece_clicked(piece)
 
 func _on_cell_clicked(pos: Vector2i) -> void:
@@ -209,7 +210,12 @@ func _on_clear_hints() -> void:
 func _on_flip_view() -> void:
 	# D4：翻转序列 = 列阵音效（BoardView.flip_view 内部触发） + 背景切换 + 重算布局 + Tween
 	_board_view.flip_view()
-	_move_hint_layer.set_flipped(not _move_hint_layer._flipped) if "flipped" in _move_hint_layer else null
+	# 同步 InputProvider 和 MoveHintLayer 的翻转状态
+	var new_flipped: bool = _board_view.flipped if "flipped" in _board_view else false
+	if _input_provider != null and _input_provider.has_method("set_flipped"):
+		_input_provider.set_flipped(new_flipped)
+	if _move_hint_layer.has_method("set_flipped"):
+		_move_hint_layer.set_flipped(new_flipped)
 
 func _on_move_started(move: Move) -> void:
 	# E1/E2：触发棋子移动动画 + 移动音效
@@ -236,12 +242,12 @@ func _on_game_over(result: Dictionary) -> void:
 		_fx_player.play_defeat(theme)
 
 func _on_ai_thinking_started() -> void:
-	if _hud.has_method("set_thinking"):
-		_hud.set_thinking(true)
+	if _hud.has_method("show_thinking"):
+		_hud.show_thinking(true)
 
 func _on_ai_thinking_finished() -> void:
-	if _hud.has_method("set_thinking"):
-		_hud.set_thinking(false)
+	if _hud.has_method("show_thinking"):
+		_hud.show_thinking(false)
 
 func _on_theme_changed(theme: ThemeResource) -> void:
 	if _hud != null and _hud.has_method("set_theme_resource"):
