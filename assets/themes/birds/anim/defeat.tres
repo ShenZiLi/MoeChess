@@ -1,0 +1,71 @@
+[gd_resource type="SpriteFrames" load_steps=13 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_001.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_002.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_003.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_004.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_005.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_006.png" id="6"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_007.png" id="7"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_008.png" id="8"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_009.png" id="9"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_010.png" id="10"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_011.png" id="11"]
+[ext_resource type="Texture2D" path="res://assets/themes/birds/anim/defeat_012.png" id="12"]
+
+[resource]
+animations = [{
+"frames": [
+{
+"duration": 1.0,
+"texture": ExtResource("1")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("2")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("3")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("4")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("5")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("6")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("7")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("8")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("9")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("10")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("11")
+},
+{
+"duration": 1.0,
+"texture": ExtResource("12")
+}
+],
+"loop": false,
+"name": &"defeat",
+"speed": 24.0
+}]

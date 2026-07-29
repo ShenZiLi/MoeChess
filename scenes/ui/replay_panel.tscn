@@ -1,0 +1,59 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/replay_panel.gd" id="1_rp"]
+
+[node name="ReplayPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rp")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="ProgressSlider" type="HSlider" parent="VBox"]
+layout_mode = 2
+min_value = 0.0
+max_value = 0.0
+value = 0.0
+editable = false
+
+[node name="StepLabel" type="Label" parent="VBox"]
+layout_mode = 2
+text = "— / —"
+horizontal_alignment = 1
+
+[node name="ButtonRow" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="BackwardButton" type="Button" parent="VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "◀ 后退"
+
+[node name="AutoPlayButton" type="Button" parent="VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "▶▶ 自动播放"
+
+[node name="ForwardButton" type="Button" parent="VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "前进 ▶"
+
+[node name="ExitButton" type="Button" parent="VBox/ButtonRow"]
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "退出"
