@@ -89,6 +89,25 @@
 
 **复发规则**：AGENTS.md 允许"外部脚本用于资源处理"。当 Godot EditorScript 不可用时，Python+PIL 是生成占位资源的可行替代。新皮肤只需在 THEMES 字典加一项配置后重跑脚本。正式美术替换时只需覆盖 PNG 并将 is_placeholder 改为 false。
 
+### EX-008 正式美术替换：AI 关键帧 + Python 合成动画帧（2026-07-29）
+
+**现象**：占位棋子图（彩色圆盘+字母）需替换为正式猫猫美术。直接用 AI 逐帧生成 14×5×12=840 帧不可行：调用次数受限，且 AI 无法保证帧间时序连贯（呼吸/行走/倒下会闪烁）。验收 C3 要求每状态 ≥12 帧，不能减帧。
+
+**根因**：AI 图像生成擅长单张关键帧，不擅长批量连贯动画帧序列。需要"关键帧 + 程序合成"两段式管线。
+
+**修复**（cats 皮肤正式美术）：
+- AI 生成 14 张绿幕关键帧到 `assets/themes/cats/_keyframes/{piece}.png`（绿幕背景便于抠除；品种映射按设计文档 §4.1：布偶=king、英短=chariot、橘猫=cannon，补全 美短=advisor、波斯=elephant、暹罗=horse、狸花=pawn）
+- 新增 `assets/themes/cats/_synthesize_frames.py`（Python+PIL）：chroma-key 抠绿（`g>r+25 & g>b+25 & g>90`）+ despill（g 压到 ≤max(r,b)+8）+ 裁剪居中 → 512×512 base，再合成 5 状态×12 帧（idle 呼吸 sin 缩放/selected 提亮上跳/moving 横摆微旋/killing 前冲闪光/killed 旋转淡出去饱和），覆盖 `pieces/{piece}/{state}_{frame:03}.png`
+- `.tres` 以 `[ext_resource path]` 路径式引用 PNG，覆盖 PNG 即生效，**无需重生成 .tres**；`.import` 由 Godot 首次打开按源 md5 自动重导入
+- `theme.tres` 的 `piece_mapping` 修正为与设计文档一致；`is_placeholder` 保持 true（因 sfx.tres 七音效仍 null，EX-006 要求 placeholder 模式才允许 SFX 为空——美术替换不等于整皮完成）
+
+**复发规则**：
+1. AI 生成透明背景 sprite 不可靠（模型常返回 RGB 实色背景）。**绿幕（#00FF00）+ chroma-key** 是稳健替代：红底座/奶白猫/金冠等主体色都不含纯绿，可干净抠除。白色背景不可用（与奶白猫毛冲突）。
+2. AI 关键帧生成后主体常不在画面正中——脚本必须**按 alpha bbox 裁剪居中**，不能假定居中。
+3. 替换皮肤 PNG 时，**保持文件路径与命名不变**，则 `.tres` 路径引用自动生效，无需重生成资源引用。仅当新增/删除帧或改命名时才需重生成 .tres。
+4. `is_placeholder` 是皮肤级标记：美术替换但音频未替换时**必须保持 true**（否则 validate_theme.gd 的 SFX 校验失败，C8 红线破）。整皮所有资源（美术+音频+特效）都正式后再翻 false。
+5. 动画合成给 scale-up 留边距：主体缩放到 BASE_FIT=460 放进 512 画布（留 26px），避免 idle/selected 微缩放时裁切。旋转类状态（killed）旋转角 ≤75° 且最终帧 alpha 低，即便理论 bbox 略超画布也不可见。
+
 ---
 
 ## 复发规则汇总
@@ -102,7 +121,8 @@
 7. **theme.tres 入口资源**：新增皮肤目录后必须验证 theme.tres 存在且可加载；ThemeManager 启动日志应打印已登记数量。
 8. **校验逻辑一致性**：ThemeResource.validate_all 与 validate_theme.gd 必须保持 is_placeholder 语义一致。
 9. **Python 资源生成**：Godot EditorScript 不可用时，Python+PIL 可替代生成占位资源（AGENTS.md 允许外部脚本用于资源处理）。
+10. **正式美术替换管线**：AI 逐帧生成动画不可行（帧间不连贯+调用受限），用「AI 关键帧（绿幕）+ Python chroma-key 合成 5 状态×12 帧」。替换 PNG 时保持路径命名不变则 .tres 路径引用自动生效；美术替换但音频未替换时 is_placeholder 必须保持 true（EX-006）。
 
 ---
 
-_最后更新：2026-07-29_
+_最后更新：2026-07-29（新增 EX-008 正式美术替换经验）_
