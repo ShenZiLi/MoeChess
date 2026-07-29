@@ -1,0 +1,13 @@
+[gd_resource type="ThemeSFXResource" script_class="ThemeSFXResource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/theme/theme_sfx_resource.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+formation_sfx = null
+select_sfx = null
+move_sfx = null
+kill_sfx = null
+killed_sfx = null
+victory_sfx = null
+defeat_sfx = null

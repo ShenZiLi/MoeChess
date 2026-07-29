@@ -1,0 +1,62 @@
+[gd_resource type="ThemeResource" script_class="ThemeResource" load_steps=23 format=3]
+
+[ext_resource type="Script" path="res://scripts/theme/theme_resource.gd" id="1"]
+[ext_resource type="Resource" path="res://assets/themes/fish/sfx.tres" id="2"]
+[ext_resource type="PackedScene" path="res://assets/themes/fish/fx/kill_fx.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://assets/themes/fish/fx/killed_fx.tscn" id="4"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/anim/victory.tres" id="5"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/anim/defeat.tres" id="6"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_king/red_king.tres" id="7"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_advisor/red_advisor.tres" id="8"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_elephant/red_elephant.tres" id="9"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_horse/red_horse.tres" id="10"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_chariot/red_chariot.tres" id="11"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_cannon/red_cannon.tres" id="12"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/red_pawn/red_pawn.tres" id="13"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_king/black_king.tres" id="14"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_advisor/black_advisor.tres" id="15"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_elephant/black_elephant.tres" id="16"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_horse/black_horse.tres" id="17"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_chariot/black_chariot.tres" id="18"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_cannon/black_cannon.tres" id="19"]
+[ext_resource type="SpriteFrames" path="res://assets/themes/fish/pieces/black_pawn/black_pawn.tres" id="20"]
+[ext_resource type="Texture2D" path="res://assets/themes/fish/ui/speed_button_idle.png" id="21"]
+[ext_resource type="Texture2D" path="res://assets/themes/fish/ui/speed_button_fast.png" id="22"]
+
+[resource]
+script = ExtResource("1")
+theme_name = "鱼儿海洋"
+theme_id = "fish"
+is_placeholder = true
+pieces = {
+"red_king": ExtResource("7"),
+"red_advisor": ExtResource("8"),
+"red_elephant": ExtResource("9"),
+"red_horse": ExtResource("10"),
+"red_chariot": ExtResource("11"),
+"red_cannon": ExtResource("12"),
+"red_pawn": ExtResource("13"),
+"black_king": ExtResource("14"),
+"black_advisor": ExtResource("15"),
+"black_elephant": ExtResource("16"),
+"black_horse": ExtResource("17"),
+"black_chariot": ExtResource("18"),
+"black_cannon": ExtResource("19"),
+"black_pawn": ExtResource("20")
+}
+kill_fx = ExtResource("3")
+killed_fx = ExtResource("4")
+victory_anim = ExtResource("5")
+defeat_anim = ExtResource("6")
+sfx = ExtResource("2")
+piece_mapping = {
+"锦鲤": "king",
+"金鱼": "advisor",
+"热带鱼": "elephant",
+"斗鱼": "horse",
+"龙鱼": "chariot",
+"斑马鱼": "cannon",
+"孔雀鱼": "pawn"
+}
+speed_button_idle = ExtResource("21")
+speed_button_fast = ExtResource("22")
