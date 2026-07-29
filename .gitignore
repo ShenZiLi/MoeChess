@@ -36,3 +36,4 @@ env/
 # Env
 .env
 .env.local
+.godot
