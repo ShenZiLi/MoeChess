@@ -1,10 +1,34 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
 ;
 ; MoeChess 项目入口
 ; Godot 4.x + GDScript
 ;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="MoeChess"
+config/description="萌象棋 — 用可爱动物棋子的中国象棋"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://assets/ui/icon.png"
+
+[autoload]
+
+GameLogger="*res://scripts/debug/logger.gd"
+ThemeManager="*res://scripts/theme/theme_manager.gd"
+GameStateMachine="*res://scripts/states/game_state_machine.gd"
+SaveManager="*res://scripts/core/save_manager.gd"
 config/description="萌象棋 — 萌物皮肤的中国象棋"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 
@@ -12,9 +36,24 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 window/size/width=1080
 window/size/height=1920
+window/size/viewport_width=1080
+window/size/viewport_height=1920
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
+
+[input]
+
+ui_select={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":32,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
+ui_cancel={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194305,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
+]
+}
 
 [rendering]
 

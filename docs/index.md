@@ -16,9 +16,14 @@
 
 | 文档 | 说明 | 状态 |
 |------|------|------|
-| [docs/development/acceptance-standard.md](development/acceptance-standard.md) | v1.0 验收标准（已确认冻结为外部合格线） | 已确认 |
-| [docs/subagent-guide.md](subagent-guide.md) | 子 Agent 协作规则 | 已建 |
-| [docs/builder-reviewer-separation.md](builder-reviewer-separation.md) | 写代码 AI 与挑毛病 AI 分离规则 | 已建 |
+| [docs/development/acceptance-standard.md](development/acceptance-standard.md) | v1.0 验收标准（已冻结为外部合格线） | 已冻结 |
+| [docs/development/test-cases.md](development/test-cases.md) | v1.0 测试用例（A1-J4 共 73 条验收 / 174 个用例） | 已确认 |
+| [docs/development/acceptance-coverage.md](development/acceptance-coverage.md) | 验收标准覆盖核对报告（acceptance-checker，73/73 完全覆盖） | 已完成 |
+| [docs/development/static-check-report.md](development/static-check-report.md) | 静态检查报告（错误 2 已修复，警告 9，提示 4） | 已完成 |
+| [docs/development/visual-review-report.md](development/visual-review-report.md) | 视觉复核报告（visual-reviewer，7 通过 / 9 不通过 / 2 警告，根因：编排层缺失） | 已完成 |
+| [docs/development/reviewer-report.md](development/reviewer-report.md) | 综合复核报告（reviewer，结论：有条件通过） | 已完成 |
+| [docs/subagent-guide.md](subagent-guide.md) | 子 Agent 协作规则 | 待建 |
+| [docs/builder-reviewer-separation.md](builder-reviewer-separation.md) | 写代码 AI 与挑毛病 AI 分离规则 | 待建 |
 
 ## 资源
 
@@ -30,7 +35,13 @@
 
 | 文档 | 说明 | 状态 |
 |------|------|------|
-| [docs/experience-library/](experience-library/) | 开发经验、已解决问题、复发规则 | 待积累 |
+| [docs/experience-library/README.md](experience-library/README.md) | 开发经验（EX-001~EX-007 已解决 7 项 + 9 条复发规则） | 持续积累 |
+
+## 交付回执
+
+| 文档 | 说明 | 状态 |
+|------|------|------|
+| [docs/development/final-delivery-note.md](development/final-delivery-note.md) | 主 Agent 最终交付总结（step11，含红线达标核对与运行时待验证清单） | 已完成 |
 
 ---
 
@@ -43,4 +54,4 @@
 
 ---
 
-_最后更新：2026-07-28_
+_最后更新：2026-07-29（新增 final-delivery-note.md；经验库更新至 EX-007）_
