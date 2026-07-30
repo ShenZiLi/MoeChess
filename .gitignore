@@ -37,3 +37,8 @@ env/
 .env
 .env.local
 .godot
+export/
+addons/
+/assets
+*.uid
+*.import
