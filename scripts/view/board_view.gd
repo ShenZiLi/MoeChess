@@ -158,41 +158,6 @@ func set_speed_mode(mode: int) -> void:
 		if pv != null:
 			pv.set_speed_mode(mode)
 
-## 设置当前主题（C9：皮肤切换后重载棋子贴图）
-func set_theme(theme: ThemeResource) -> void:
-	_on_theme_changed(theme)
-
-## 播放走子动画（E1/E2：由 main_scene_controller._on_move_started 调用）
-## 驱动 PieceView.move_to + 吃子 killed 动画，完成后发 piece_move_finished
-func play_move(move: Move) -> void:
-	if move == null:
-		return
-	var from_key: Vector2i = Vector2i(move.from_col, move.from_row)
-	var to_key: Vector2i = Vector2i(move.to_col, move.to_row)
-	var pv: PieceView = _piece_views.get(from_key, null)
-	if pv == null:
-		# 兜底：找不到棋子视图，直接通知完成
-		piece_move_finished.emit(move.moved_piece)
-		return
-	# 处理吃子：被吃方播放 killed 动画
-	if move.captured != null:
-		var captured_pv: PieceView = _piece_views.get(to_key, null)
-		if captured_pv != null:
-			captured_pv.play_state(CoreConstants.AnimState.KILLED)
-	# 同步字典键：从 from 移到 to
-	_piece_views.erase(from_key)
-	_piece_views[to_key] = pv
-	# 驱动 PieceView 移动动画
-	pv.move_to(move.to_col, move.to_row, true)
-
-## 播放棋子状态动画（E1：选中动画，由 main_scene_controller._on_piece_selected 调用）
-func play_piece_state(piece: Piece, anim_state: int) -> void:
-	if piece == null:
-		return
-	var pv: PieceView = _piece_views.get(Vector2i(piece.col, piece.row), null)
-	if pv != null:
-		pv.play_state(anim_state)
-
 ## 获取当前棋子视觉
 func get_piece_view(col: int, row: int) -> PieceView:
 	return _piece_views.get(Vector2i(col, row), null)
@@ -303,9 +268,10 @@ func _set_piece_uniform_scale(pv: PieceView, s: float) -> void:
 		pv.scale = Vector2(s, s)
 
 func _get_theme_manager() -> Node:
-	# 注意：get_node_or_null 是 Node 的方法，SceneTree 没有。
-	# board_view 是 Node2D（在树中），直接用绝对路径查找 autoload。
-	return get_node_or_null("/root/ThemeManager")
+	var tree: SceneTree = get_tree()
+	if tree == null:
+		return null
+	return tree.get_node_or_null("/root/ThemeManager")
 
 ## 当背景纹理为 null 时（PLACEHOLDER 模式），用纯色矩形兜底显示
 ## 满足 D1：棋盘轻度倾斜 + 近大远小透视效果可见

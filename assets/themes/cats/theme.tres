@@ -51,12 +51,12 @@ defeat_anim = ExtResource("6")
 sfx = ExtResource("2")
 piece_mapping = {
 "布偶": "king",
-"英短": "advisor",
-"暹罗": "elephant",
-"美短": "horse",
-"橘猫": "chariot",
-"狸花": "cannon",
-"奶牛": "pawn"
+"美短": "advisor",
+"波斯": "elephant",
+"暹罗": "horse",
+"英短": "chariot",
+"橘猫": "cannon",
+"狸花": "pawn"
 }
 speed_button_idle = ExtResource("21")
 speed_button_fast = ExtResource("22")

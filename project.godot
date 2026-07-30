@@ -2,9 +2,6 @@
 ; It's best edited using the editor UI and not directly,
 ; since the parameters that go here are not all obvious.
 ;
-; MoeChess 项目入口
-; Godot 4.x + GDScript
-;
 ; Format:
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
@@ -29,13 +26,9 @@ GameLogger="*res://scripts/debug/logger.gd"
 ThemeManager="*res://scripts/theme/theme_manager.gd"
 GameStateMachine="*res://scripts/states/game_state_machine.gd"
 SaveManager="*res://scripts/core/save_manager.gd"
-config/description="萌象棋 — 萌物皮肤的中国象棋"
-config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [display]
 
-window/size/width=1080
-window/size/height=1920
 window/size/viewport_width=1080
 window/size/viewport_height=1920
 window/stretch/mode="canvas_items"

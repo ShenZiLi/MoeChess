@@ -304,12 +304,9 @@ func _apply_move_and_animate(move: Move) -> void:
 	_sub_state = SubState.ANIMATING_MOVE
 	move_started.emit(move)
 	# 触发自动存档（G5）— 通过 GameStateMachine autoload 通知
-	# PlayingState 是 RefCounted（不在树中），必须经 SceneTree.root 访问 autoload
-	var tree: SceneTree = Engine.get_main_loop() as SceneTree
-	if tree != null and tree.root != null:
-		var gsm: Node = tree.root.get_node_or_null("/root/GameStateMachine")
-		if gsm != null and gsm.has_method("notify_move_applied"):
-			gsm.notify_move_applied(_state)
+	var gsm: Node = Engine.get_main_loop().root.get_node_or_null("GameStateMachine")
+	if gsm != null and gsm.has_method("notify_move_applied"):
+		gsm.notify_move_applied(_state)
 	GameLogger.debug("[PlayingState] move applied: %s" % move)
 
 ## 检查回合结束（将死/困毙/长将和棋）

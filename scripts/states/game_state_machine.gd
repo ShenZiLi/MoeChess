@@ -253,10 +253,6 @@ var _speed_mode: int = CoreConstants.SpeedMode.NORMAL
 func set_speed_mode(mode: int) -> void:
 	_speed_mode = mode
 
-## 获取当前加速模式（HUD 加速按钮读取）
-func get_speed_mode() -> int:
-	return _speed_mode
-
 ## 获取当前 ReplayController（Replay 状态有效）
 func get_replay_controller() -> ReplayController:
 	return _replay_controller
